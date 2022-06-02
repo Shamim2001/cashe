@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CashIn;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,9 +17,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
        User::create([
-           'name'   => 'Shadhin',
+           'name'   => 'Shamim Ahmed',
            'email'  => 'a@ida.com',
            'password'   => bcrypt('123'),
+           'role' => 'admin'
        ]);
+
+       CashIn::factory(50)->create();
     }
 }

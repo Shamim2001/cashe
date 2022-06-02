@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\backend\ActivityController;
+use App\Http\Controllers\backend\CashInController;
 use App\Http\Controllers\backend\DashboardController;
-use App\Http\Controllers\CashInController;
-use App\Http\Controllers\LoanController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\backend\LoanController;
+use App\Http\Controllers\backend\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -26,11 +26,14 @@ Route::get('/clear', function () {
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    // resourse route
-    Route::resource('cashIn', CashInController::class);
-    Route::resource('loan', LoanController::class);
-    Route::resource('User', UserController::class);
-    Route::resource('activity', ActivityController::class);
+    // cash In route
+    Route::get( '/cashin', [CashInController::class, 'index'] )->name( 'cashin.index' );
+    // loan route
+    Route::get( '/loan', [LoanController::class, 'index'] )->name( 'loan.index' );
+    // users route
+    Route::get( '/users', [UserController::class, 'index'] )->name( 'users.index' );
+    // activity route
+    Route::get( '/activity', [ActivityController::class, 'index'] )->name( 'activity.index' );
 });
 
 
