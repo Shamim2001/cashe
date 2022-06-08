@@ -28,8 +28,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     // cash In route
     Route::get( '/cashin', [CashInController::class, 'index'] )->name( 'cashin.index' );
+    Route::delete( '/cashin/delete/{id}', [CashInController::class, 'delete'] )->name( 'cashin.delete' );
     // loan route
-    Route::get( '/loan', [LoanController::class, 'index'] )->name( 'loan.index' );
+    // Route::get( '/loan', [LoanController::class, 'index'] )->name( 'loan.index' );
+    Route::resource('/loan', LoanController::class);
     // users route
     Route::get( '/users', [UserController::class, 'index'] )->name( 'users.index' );
     // activity route

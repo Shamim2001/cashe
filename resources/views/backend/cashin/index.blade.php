@@ -1,52 +1,60 @@
-@include('backend.layouts.header')
+@extends('backend.layouts.master')
 
-<!-- content -->
-<div class="pr-8 p-10 pt-20 bg-purple-200 mainContentArea">
+@section('title', 'IDA | CashIn')
+@section('page', 'CASH IN')
+
+@section('content')
     <div class=" mt-10 py-10 flex items-center justify-between">
-        <p class="text-lg font-medium">50 users found</p>
+        <p class="text-lg font-medium">{{ count($cashins) }} deposits found</p>
         <div class="">
             <a href="#" class="btn btn_primary">Requests</a>
             <a href="#" class="btn btn_secondary">Add New</a>
         </div>
     </div>
     <!-- table -->
-    <div class="w-full h-full">
-        <table class="bg-white w-full h-full">
-            <thead class="border-2 border-gray-400">
-                <tr class="">
-                    <th class="text-lg w-20 py-2 border-2 border-gray-400">#</th>
-                    <th class="text-lg py-2 border-2 border-gray-400">Depositor</th>
-                    <th class="text-lg py-2 border-2 border-gray-400">Amount</th>
-                    <th class="text-lg py-2 border-2 border-gray-400">Transaction ID</th>
-                    <th class="text-lg py-2 border-2 border-gray-400">Date</th>
-                    <th class="text-lg py-2 border-2 border-gray-400">Action</th>
+    <table class="w-full border-collaps bg-white ">
+        <thead>
+            <tr>
+                <th class="border py-2 text-center px-2">#</th>
+                <th class="border py-2 text-center px-2">Depositor</th>
+                <th class="border py-2 text-center px-2">Amount</th>
+                <th class="border py-2 text-center px-2">Transaction ID</th>
+                <th class="border py-2 text-center px-2">Date</th>
+                <th class="border py-2 text-center px-2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($cashins as $cash)
+                <tr>
+                    <td class="border py-2 text-center px-2">{{ $cash->id }}</td>
+                    <td class="border py-2 text-center px-2">{{ $cash->user->name }}</td>
+                    <td class="border py-2 text-center px-2">{{ $cash->amount }}</td>
+                    <td class="border py-2 text-center px-2">{{ $cash->transaction_id }}</td>
+                    <td class="border py-2 text-center px-2 flex items-center justify-between">
+                        {{ $cash->created_at->format('d M, Y') }}
+                        <small class="">{{ $cash->created_at->diffForHumans() }}</small>
+                    </td>
+                    <td class="border text-center px-2">
+                        <div class="bg-red-500 inline-block px-2 py-1">
+                            <form action="{{ route('cashin.delete', $cash->id) }}" method="POST"
+                                onsubmit="confirm('Do You Want To Delete!')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"><i class="fa fa-trash text-white "></i></button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($cashins as $cashin)
-                    <tr>
-                        <td class="py-2 text-center border-2 border-gray-400">{{ $cashin->id }}</td>
-                        <td class="py-2 text-center border-2 border-gray-400">{{ $cashin->user->name }}</td>
-                        <td class="py-2 text-center border-2 border-gray-400">{{ $cashin->amount }}</td>
-                        <td class="py-2 text-center border-2 border-gray-400">{{ $cashin->transaction_id }}</td>
-                        <td class="py-2 text-center border-2 border-gray-400">{{ $cashin->created_at->format('d m, Y') }}</td>
-                        <td class="py-2 text-center border-2 border-gray-400">btn</td>
-                    </tr>
-                @endforeach
-            </tbody>
+                <tr>
+                @empty
+                    <td class="text-center" colspan="6">No Cash In Record Found!</td>
+                </tr>
+            @endforelse
+        </tbody>
 
-        </table>
-        <div class="mt-6">
-            {{ $cashins->links() }}
-        </div>
+    </table>
+    <div class="mt-6">
+        {{ $cashins->links() }}
     </div>
 
-</div>
-
-
-
-@include('backend.layouts.sidebar')
-</div>
-</div>
-
-@include('backend.layouts.footer')
+@endsection
