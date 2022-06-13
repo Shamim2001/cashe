@@ -8,7 +8,7 @@
         <p class="text-lg font-medium">{{ count($users) }} records found</p>
         <div class="">
             <a href="#" class="btn btn_primary">Requests</a>
-            <a href="#" class="btn btn_secondary">Add New</a>
+            <a href="{{ route('users.create') }}" class="btn btn_secondary">Add New</a>
         </div>
     </div>
     <!-- table -->
@@ -19,26 +19,32 @@
                     <th class="text-base w-20 py-2 border border-gray-400">#</th>
                     <th class="text-base py-2 border border-gray-400">Name</th>
                     <th class="text-base py-2 border border-gray-400">Email</th>
+                    <th class="text-base py-2 border border-gray-400">Father Name</th>
+                    <th class="text-base py-2 border border-gray-400">Address</th>
                     <th class="text-base py-2 border border-gray-400">Phone</th>
-                    <th class="text-base py-2 border border-gray-400">Deposite</th>
                     <th class="text-base py-2 border border-gray-400">Role</th>
+                    <th class="text-base py-2 border border-gray-400">Status</th>
                     <th class="text-base py-2 border border-gray-400">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($users as $user)
                     <tr>
-                        <td class="py-2 text-center border border-gray-400">{{ $user->id }}</td>
+                        <td class="py-2 text-center border border-gray-400">{{ $user->image }}</td>
                         <td class="py-2 text-center border border-gray-400">{{ $user->name }}</td>
                         <td class="py-2 text-center border border-gray-400">{{ $user->email }}</td>
-                        <td class="py-2 text-center border border-gray-400">{{ $user->phone }}
-                        </td>
+                        <td class="py-2 text-center border border-gray-400">{{ $user->fathername }}</td>
+                        <td class="py-2 text-center border border-gray-400">{{ $user->address }}</td>
+                        <td class="py-2 text-center border border-gray-400">{{ $user->phone }}</td>
                         <td class="py-2 text-center border border-gray-400">{{ $user->role }}</td>
                         <td class="py-2 text-center border border-gray-400">{{ $user->status }}
                         </td>
-                        <td class="py-2 text-center border border-gray-400">
-                            <form action="{{ route('cashin') }}" method="POST"
+                        <td class="py-2 px-2 flex text-center border border-gray-400">
+                            <a href="{{ route('users.edit', $user) }}" class="text-green-400 mx-3"><i class="fa fa-edit"></i></a>
+                            <form action="{{ route('users.destroy', $user) }}" method="POST"
                                 onsubmit="confirm('Do You Want To Delete!')">
+                                @csrf
+                                @method('DELETE')
                                 <button type="submit"><i class="fa fa-trash text-red-500"></i></button>
                             </form>
                         </td>

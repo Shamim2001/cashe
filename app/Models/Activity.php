@@ -10,4 +10,6 @@ class Activity extends Model
     use HasFactory;
     protected $table = 'activities';
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+
 }

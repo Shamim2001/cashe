@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Events\ActivityEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\Loan;
 use App\Models\LonerInformation;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -65,6 +68,8 @@ class LoanController extends Controller {
                 'name'   => $request->name,
                 'email'  => $request->email,
                 'password'  => Hash::make(Str::random(8)),
+                'fathername'  => $request->fatherName,
+                'address'  => $request->address,
                 'phone'  => $request->phone,
                 'image'  => $thumb,
                 'role'   => 'client',
@@ -86,6 +91,9 @@ class LoanController extends Controller {
                 'nid' => $request->nid,
                 'business_category' => $request->business,
             ]);
+
+            // Event Fire
+            ActivityEvent::dispatch('New Loan Created','Loan', Auth::id());
 
             return redirect()->route('loan.index')->with('success', 'Loan Created');
         }

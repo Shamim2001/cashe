@@ -29,11 +29,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     // cash In route
     Route::get( '/cashin', [CashInController::class, 'index'] )->name( 'cashin.index' );
     Route::delete( '/cashin/delete/{id}', [CashInController::class, 'delete'] )->name( 'cashin.delete' );
-    // loan route
-    // Route::get( '/loan', [LoanController::class, 'index'] )->name( 'loan.index' );
+
+    // Resourse Route
     Route::resource('/loan', LoanController::class);
-    // users route
-    Route::get( '/users', [UserController::class, 'index'] )->name( 'users.index' );
+    Route::resource( '/users', UserController::class );
+
     // activity route
     Route::get( '/activity', [ActivityController::class, 'index'] )->name( 'activity.index' );
 });
