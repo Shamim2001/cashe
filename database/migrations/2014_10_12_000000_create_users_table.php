@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->enum('role', ['admin', 'member', 'client'])->default('admin');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('mail_sent', ['yes', 'no'])->default('no');
             $table->rememberToken();
             $table->timestamps();
         });

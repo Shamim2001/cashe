@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -19,6 +17,14 @@ class User extends Authenticatable
      */
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    // Accessor
+    public function getImageAttribute( $name ) {
+        if ( str_starts_with( $name, 'http' ) ) {
+            return $name;
+        } else {
+            return asset( 'storage/uploads/clients/' . $name );
+        }
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

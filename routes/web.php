@@ -33,7 +33,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     // Resourse Route
     Route::resource('/loan', LoanController::class);
     Route::resource( '/users', UserController::class );
-
+    // email send
+    Route::get('/mail/send/{user}', [UserController::class, 'sendEmail'])->name('users.sendEmail');
     // activity route
     Route::get( '/activity', [ActivityController::class, 'index'] )->name( 'activity.index' );
 });

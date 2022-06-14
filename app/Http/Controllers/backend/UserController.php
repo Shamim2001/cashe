@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UserController extends Controller {
@@ -63,10 +65,11 @@ class UserController extends Controller {
             'address'    => 'required',
         ] );
 
-        $thumb = $user->thumbnail;
+        $thumb = $user->image;
         if ( !empty( $request->file( 'thumbnail' ) ) ) {
             $thumb = time() . '-' . $request->file( 'thumbnail' )->getClientOriginalName();
             $thumb = str_replace( ' ', '-', $thumb );
+            Storage::delete('public/uploads/clients'.$thumb);
 
             $request->file( 'thumbnail' )->storeAs( 'public/uploads/clients', $thumb );
         }
@@ -92,4 +95,16 @@ class UserController extends Controller {
         $user->delete();
         return redirect()->route( 'users.index' )->with( 'success', 'User Deleted!' );
     }
+
+     // Email send
+    public function sendEmail(User $user)
+    {
+        Mail::send('emails.email', [''], function ($message) {
+            $message->from('john@johndoe.com', 'John Doe');
+            $message->to('john@johndoe.com', 'John Doe');
+            $message->subject('Test Mail');
+        });
+        return redirect()->route('users.index')->with('success', 'Email Sent');
+    }
+
 }
