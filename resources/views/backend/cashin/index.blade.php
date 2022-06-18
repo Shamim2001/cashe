@@ -35,12 +35,12 @@
                         <small class="">{{ $cash->created_at->diffForHumans() }}</small>
                     </td>
                     <td class="border text-center px-2">
-                        <div class="bg-red-500 inline-block px-2 py-1">
+                        <div class="border-2 border-red-500 rounded-md inline-block px-2 py-1">
                             <form action="{{ route('cashin.delete', $cash->id) }}" method="POST"
                                 onsubmit="confirm('Do You Want To Delete!')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit"><i class="fa fa-trash text-white "></i></button>
+                                <button type="submit"><i class="fa fa-trash text-red-500 "></i></button>
                             </form>
                         </div>
                     </td>

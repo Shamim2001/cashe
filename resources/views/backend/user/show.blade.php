@@ -78,12 +78,11 @@
                                 @if (!empty(Auth::user()->image))
                                     <img id="previewImg" class="w-48 max-h-56"
                                     src="{{ $user->image }}" alt="image">
-
                                 @else
                                     <img id="previewImg" class="w-48 max-h-56"
                                     src="{{ asset('backend/assets/images/users.png') }}" alt="image">
-                                @endif
 
+                                @endif
                             </div>
 
                             <label for="thumbnail" class="rounded-md bg-sky-600 text-white text-sm text-center py-2">Upload

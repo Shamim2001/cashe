@@ -2,7 +2,7 @@
 
  <div class="fixed flex flex-col justify-between left-0 top-0 h-full bg-sky-300 shadow-md z-10" id="sidebar">
     <div class="">
-        <div class="text-white h-32 font-bold text-base uppercase text-center py-5 bg-gray-700">
+        <div class="text-white h-32 font-bold text-base uppercase text-center py-5 bg-[#34495E]">
             <svg class="mx-auto" width="87" height="85" viewBox="0 0 87 85" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -13,8 +13,8 @@
                     fill="white" />
             </svg>
         </div>
-        <div class="py-10">
-            <a href="{{ route('dashboard.index') }}" class="flex items-center my-1 pl-4 py-3 {{ request()->routeIs('dashboard.*') ? 'text-white bg-sky-900 border-sky-900' : ''}}">
+        <div class="py-5">
+            <a href="{{ route('dashboard.index') }}" class="flex items-center my-1 pl-4 py-2 {{ request()->routeIs('dashboard.*') ? 'text-white bg-gray-700 border-gray-700' : ''}}">
                 <svg class="w-5 mr-2" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M10 0C4.48596 0 0 4.48626 0 10C0 15.5137 4.48596 20 10 20C15.514 20 20 15.514 20 10C20 4.48596 15.514 0 10 0ZM10 19.5369C4.74121 19.5369 0.463106 15.2588 0.463106 10.0003C0.463106 4.7418 4.74121 0.463698 10 0.463698C15.2588 0.463698 19.5369 4.74121 19.5369 10C19.5369 15.2588 15.2585 19.5369 10 19.5369Z"
@@ -31,7 +31,7 @@
                 </svg>
                 Dashboard</a>
             <a href="{{ route('cashin.index') }}"
-                class="flex items-center my-1 pl-4 py-3 {{ request()->routeIs('cashin.*') ? 'text-white bg-sky-900 border-sky-900' : ''}}">
+                class="flex items-center my-1 pl-4 py-2 {{ request()->routeIs('cashin.*') ? 'text-white bg-[#34495E] hover:bg-[#34495E]' : ''}}">
                 <svg class="w-5 mr-2" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M14.5273 5.625L18.5547 6.68359L19.5703 2.65625L18.7969 2.45312L18.1367 4.96484C16.4492 2.24219 13.4375 0.429688 10 0.429688C4.71484 0.429688 0.429688 4.71484 0.429688 10C0.429688 15.2852 4.71484 19.5703 10 19.5703C13.5273 19.5703 16.6055 17.6641 18.2656 14.8242L17.5742 14.4492C16.0469 17.043 13.2266 18.7852 10 18.7852C5.14844 18.7852 1.21484 14.8516 1.21484 10C1.21484 5.14844 5.14844 1.21484 10 1.21484C13.2539 1.21484 16.0977 2.98438 17.6133 5.61719L14.7305 4.85156L14.5273 5.625Z"
@@ -44,7 +44,7 @@
             </a>
 
             <a href="{{ route('loan.index') }}"
-                class="flex items-center my-1 pl-4 py-3 {{ request()->routeIs('loan.*') ? 'text-white bg-sky-900 border-sky-900' : ''}}">
+                class="flex items-center my-1 pl-4 py-2 {{ request()->routeIs('loan.*') ? 'text-white bg-[#34495E] hover:bg-[#34495E]' : ''}}">
                 <svg class="w-5 mr-2" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M13.6114 4.27732C13.6114 2.5333 12.1935 1.11432 10.4506 1.11432C8.707 1.11432 7.28802 2.5333 7.28802 4.27732C7.28802 6.02024 8.7066 7.43892 10.4506 7.43892C12.1935 7.43882 13.6114 6.01984 13.6114 4.27732ZM10.4505 6.93422C8.98398 6.93422 7.79243 5.74236 7.79243 4.27692C7.79243 2.81108 8.98398 1.61852 10.4505 1.61852C11.9164 1.61852 13.1082 2.81108 13.1082 4.27692C13.1079 5.74276 11.916 6.93422 10.4505 6.93422Z"
@@ -68,8 +68,8 @@
                 Loan
             </a>
             <a href="{{ route('users.index') }}"
-                class="flex items-center my-1 pl-4 py-3  {{ request()->routeIs('users.*') ? 'text-white bg-sky-900 hover:bg-sky-900' : ''}}">
-                <svg class="w-5 mr-2" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                class="flex items-center my-1 pl-4 py-2  {{ request()->routeIs('users.*') ? 'text-white bg-[#34495E] hover:bg-[#34495E]' : ''}}">
+                <svg class="w-5 mr-2 hover:text-white" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M17.2219 8.43631C16.9516 8.79894 16.6422 9.12003 16.303 9.39055C17.7401 10.3073 18.6952 11.9156 18.6952 13.743C18.6952 14.3361 17.8249 14.7451 17.3062 14.9361C16.9017 15.0851 16.426 15.2071 15.9062 15.2992C15.923 15.5188 15.9317 15.7407 15.9317 15.9646C15.9317 16.1583 15.9148 16.3841 15.8657 16.6299C16.5643 16.5214 17.2058 16.3634 17.757 16.1605C19.6109 15.478 20 14.4691 20 13.743C19.9999 11.5478 18.8997 9.605 17.2219 8.43631Z"
                         fill="black" />
@@ -86,7 +86,7 @@
                 Users
             </a>
             <a href="{{ route('activity.index') }}"
-                class="flex items-center my-1 pl-4 py-3  {{ request()->routeIs('activity.*') ? 'text-white bg-sky-900 hover:bg-sky-900' : ''}}">
+                class="flex items-center my-1 pl-4 py-2  {{ request()->routeIs('activity.*') ? 'text-white bg-[#34495E] hover:bg-[#34495E]' : ''}}">
                 <svg class="w-5 mr-2" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_4_198)">
                         <path
@@ -115,7 +115,7 @@
             </a>
         </div>
     </div>
-    <div class="flex flex-col items-center justify-center w-full bg-sky-900 py-8 text-white">
+    <div class="flex flex-col items-center justify-center w-full bg-[#34495E] py-8 text-white">
         <div class="">&copy; copyright 2022</div>
         <div class="">All Rights Reserved</div>
 

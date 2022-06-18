@@ -33,6 +33,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     // Resourse Route
     Route::resource('/loan', LoanController::class);
     Route::resource( '/users', UserController::class );
+
+    // profile
+   // route::get('/profile/{user}', [UserController::class, 'profile'])->name('users.profile');
     // email send
     Route::get('/mail/send/{user}', [UserController::class, 'sendEmail'])->name('users.sendEmail');
     // activity route

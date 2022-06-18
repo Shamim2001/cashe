@@ -56,18 +56,19 @@
             <div class="ml-4 relative">
                 <div class="cursor-pointer flex items-center">
                     <img class="w-8 h-8 rounded-full object-cover"
-                        src="{{ asset('backend/assets/images/demo-user 1.png') }}" />
+                        src="{{ Auth::user()->image }}" />
                     <div class="mt-2 ml-2" id="downArrow">
                         <i class="fa-solid fa-angle-down"></i>
                     </div>
                 </div>
 
+
                 <div class="absolute z-50 mt-4 rounded-md shadow-lg w-48 right-0 py-1 bg-white" id="headerDropdown">
                     <div class="px-4 py-2 text-xs text-gray-400">Manage Account</div>
-                    <a href="#"
+
+                    <a href="{{ route('users.show',Auth::user()) }}"
                         class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 transition">Profile</a>
                     <div class="border-t border-gray-100"></div>
-
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -75,9 +76,6 @@
                             class="block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 transition">Logout</button>
 
                     </form>
-
-
-
                 </div>
             </div>
         </div>

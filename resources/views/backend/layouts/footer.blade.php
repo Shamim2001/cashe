@@ -33,8 +33,15 @@
             });
 
             $("#formClear").click(function() {
-                $("#memberForm:not('#clientType')").trigger("reset");
-                $("#address").val("Enter your address here...");
+                // $("#memberForm:not('#clientType')").trigger("reset");
+                // $("#address").val("Enter your address here...");
+                $("#name").val("");
+                $("#fatherName").val("");
+                $("#nid").val("");
+                $("#email").val("");
+                $("#phone").val("");
+                $("#address").val("");
+                console.log('hello');
             });
         });
 

@@ -17,7 +17,7 @@
                 <div class="px-10 flex-1">
                     <div class="flex justify-between items-center">
                         <label for="name" class="w-[35%] font-semibold ">Name</label>
-                        <input type="text" class=" w-full border-0 bg-gray-300 px-2 py-2 rounded-md focus:outline-none"
+                        <input id="name" type="text" class=" w-full border-0 bg-gray-300 px-2 py-2 rounded-md focus:outline-none"
                             name="name" id="name" placeholder="Jhon Deo">
                     </div>
                     <div class="mx-48 mt-2">
@@ -29,7 +29,7 @@
                         <label for="fatherName" class="w-[35%]">
                             <label for="fatherName" class="font-semibold ">Father's Name</label>
                         </label>
-                        <input type="text" class=" w-full border-0 bg-gray-300 px-2 py-2 rounded-md focus:outline-none"
+                        <input id="fatherName" type="text" class=" w-full border-0 bg-gray-300 px-2 py-2 rounded-md focus:outline-none"
                             name="fatherName" id="fatherName" placeholder="Jhon Deo">
                     </div>
                     <div class="mx-48 mt-2">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="mt-6 flex justify-between items-center">
                         <label for="nid" class="w-[35%] font-semibold ">NID</label>
-                        <input type="number" class=" w-full border-0 bg-gray-300 px-2 py-2 rounded-md focus:outline-none"
+                        <input id="nid" type="number" class=" w-full border-0 bg-gray-300 px-2 py-2 rounded-md focus:outline-none"
                             name="nid" id="nid" placeholder="123456789123">
                     </div>
                     <div class="mx-48 mt-2">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="mt-6 flex justify-between items-center">
                         <label for="email" class="w-[35%] font-semibold">Email</label>
-                        <input type="text" class="w-full border-0  bg-gray-300 px-2 py-2 rounded-md focus:outline-none"
+                        <input id="email" type="text" class="w-full border-0  bg-gray-300 px-2 py-2 rounded-md focus:outline-none"
                             name="email" id="email" placeholder="jhon@deo.com">
                     </div>
                     <div class="mx-48 mt-2">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="mt-6 flex justify-between items-center">
                         <label for="phone" class="w-[35%] font-semibold">Phone</label>
-                        <input type="text"
+                        <input id="phone" type="text"
                             class="w-full border-0 bg-gray-300 px-2 py-2 rounded-md placeholder-shown:text-black focus:outline-none"
                             name="phone" id="phone" placeholder="0123456789">
                     </div>
@@ -92,7 +92,7 @@
                 <div class="flex-1 px-10">
                     <div class="mt-6 flex justify-between items-baseline">
                         <label for="address" class="w-[23%] font-semibold">Address</label>
-                        <textarea name="address" id="address" class=" border-0 bg-gray-300 px-2 py-5 w-full rounded-md">abc</textarea>
+                        <textarea name="address" id="address" class=" border-0 bg-gray-300 px-2 py-5 w-full rounded-md">Abc</textarea>
                     </div>
                     <div class="mx-48 mt-2">
                         @error('address')
