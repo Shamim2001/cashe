@@ -12,7 +12,7 @@
     <table class="table-collaps bg-white w-full">
         <thead>
             <tr>
-                <th class="text-base w-20 py-2 border border-gray-400">#</th>
+                {{-- <th class="text-base w-20 py-2 border border-gray-400">#</th> --}}
                 <th class="text-base py-2 border border-gray-400">Name</th>
                 <th class="text-base py-2 border border-gray-400">Loan Amount</th>
                 <th class="text-base py-2 border border-gray-400">Loan Date</th>
@@ -24,7 +24,7 @@
         <tbody>
             @forelse ($loans as $loan)
                 <tr>
-                    <td class="py-2 text-center border border-gray-400">{{ $loan->id }}</td>
+                    {{-- <td class="py-2 text-center border border-gray-400">{{ $loan->id }}</td> --}}
                     <td class="py-2 text-center border border-gray-400">{{ $loan->user->name }}</td>
                     <td class="py-2 text-center border border-gray-400">{{ $loan->loan_amount }}</td>
                     <td class="py-2 text-center border border-gray-400">{{ $loan->created_at->format('d M, Y') }}

@@ -26,7 +26,7 @@
             @forelse ($activities as $activity)
                 <tr>
                     <td class="py-2 px-2 text-center border border-gray-400">{{ $activity->name }}</td>
-                    <td class="py-2 px-2 text-center border border-gray-400">{{ $activity->user }}</td>
+                    <td class="py-2 px-2 text-center border border-gray-400">{{ Auth::user()->name }}</td>
                     <td class="py-2 text-center border border-gray-400">{{ $activity->created_at->diffForHumans() }}</td>
                 </tr>
             @empty

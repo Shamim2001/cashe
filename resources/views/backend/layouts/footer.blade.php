@@ -58,6 +58,7 @@
             }
         }
     </script>
+    @flasher_render
 </body>
 
 </html>

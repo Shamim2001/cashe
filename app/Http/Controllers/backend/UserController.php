@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+use Flasher\Prime\FlasherInterface;
+
 class UserController extends Controller {
     /**
      * Display a listing of the resource.
@@ -125,7 +127,7 @@ class UserController extends Controller {
             'status'     => $request->status,
         ] );
 
-        return redirect()->route( 'users.index' )->with( 'success', 'User Updated' );
+        return redirect()->route( 'users.index' )->with( 'success', 'User has been Updated' );
     }
 
     /**
@@ -136,11 +138,12 @@ class UserController extends Controller {
      */
     public function destroy( User $user ) {
         $user->delete();
-        return redirect()->route( 'users.index' )->with( 'success', 'User Deleted!' );
+        // $flasher->addSuccess('User has been deleted!');
+        return redirect()->route( 'users.index' )->with( 'success', 'User has been Deleted!' );
     }
 
     // Email send
-    public function sendEmail( User $user ) {
+    public function sendEmail( User $user  ) {
         Mail::send( 'emails.email', [''], function ( $message ) {
             $message->from( 'john@johndoe.com', 'John Doe' );
             $message->to( 'john@johndoe.com', 'John Doe' );
@@ -151,7 +154,7 @@ class UserController extends Controller {
             'mail_sent' => 'yes'
         ]);
 
-        return redirect()->route( 'users.index' )->with( 'success', 'Email Sent' );
+        return redirect()->route( 'users.index' )->with( 'success', 'Email has been Sent' );
     }
 
 }
