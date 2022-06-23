@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-use Flasher\Prime\FlasherInterface;
-
 class UserController extends Controller {
     /**
      * Display a listing of the resource.
@@ -59,12 +57,14 @@ class UserController extends Controller {
         User::create( [
             'name'       => $request->name,
             'email'      => $request->email,
-            'password'   => Hash::make( Str::random( 8 ) ),
+            'password'   => Hash::make( $request->password ),
             'fathername' => $request->fatherName,
             'address'    => $request->address,
             'phone'      => $request->phone,
             'image'      => $thumb,
         ] );
+
+        // Activity Event fire
 
         return redirect()->route( 'users.index' )->with( 'success', 'User Created' );
     }
@@ -76,7 +76,7 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show( User $user ) {
-         return view('backend.user.show')->with('user', $user);
+        return view( 'backend.user.show' )->with( 'user', $user );
     }
 
     /**
@@ -118,7 +118,7 @@ class UserController extends Controller {
         $user->update( [
             'name'       => $request->name,
             'email'      => $request->email,
-            'password'   => Hash::make( Str::random( 8 ) ),
+            'password'   => Hash::make( $request->password ),
             'fathername' => $request->fatherName,
             'address'    => $request->address,
             'phone'      => $request->phone,
@@ -137,22 +137,29 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( User $user ) {
+
+
         $user->delete();
-        // $flasher->addSuccess('User has been deleted!');
+
+        $thumb = pathinfo($user->image);
+        $image_ext = $thumb['basename'];
+
+        Storage::delete( 'public/uploads/clients/' . $image_ext );
+
         return redirect()->route( 'users.index' )->with( 'success', 'User has been Deleted!' );
     }
 
     // Email send
-    public function sendEmail( User $user  ) {
+    public function sendEmail( User $user ) {
         Mail::send( 'emails.email', [''], function ( $message ) {
             $message->from( 'john@johndoe.com', 'John Doe' );
             $message->to( 'john@johndoe.com', 'John Doe' );
             $message->subject( 'Test Mail' );
         } );
 
-        $user->update([
-            'mail_sent' => 'yes'
-        ]);
+        $user->update( [
+            'mail_sent' => 'yes',
+        ] );
 
         return redirect()->route( 'users.index' )->with( 'success', 'Email has been Sent' );
     }

@@ -92,8 +92,7 @@ class LoanController extends Controller {
                 'business_category' => $request->business,
             ]);
 
-            // Event Fire
-            ActivityEvent::dispatch('New Loan Created','Loan', Auth::id());
+            // Activity Event Fire
 
             return redirect()->route('loan.index')->with('success', 'Loan Created');
         }
@@ -137,6 +136,10 @@ class LoanController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( $id ) {
-        //
+        Loan::find($id)->delete();
+
+        // Activity Event fire
+
+        return redirect()->route('loan.index')->with('success', 'Loan has been Deleted!');
     }
 }

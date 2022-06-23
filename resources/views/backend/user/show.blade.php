@@ -37,6 +37,18 @@
                             <p class="text-red-700 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
+                    <div class="mt-6 flex items-center">
+                        <label for="fatherName" class="w-[35%]">
+                            <label for="password" class="font-semibold ">Password</label>
+                        </label>
+                        <input type="password" class=" w-full border-0 bg-gray-300 px-2 py-2 rounded-md focus:outline-none"
+                            name="password" id="password" placeholder="password" value="{{ $user->password }}">
+                    </div>
+                    <div class="mx-48 mt-2">
+                        @error('password')
+                            <p class="text-red-700 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="mt-6 flex justify-between items-center">
                         <label for="nid" class="w-[35%] font-semibold ">NID</label>
                         <input type="number" class=" w-full border-0 bg-gray-300 px-2 py-2 rounded-md focus:outline-none"
@@ -75,7 +87,9 @@
                     <div class="flex justify-between">
                         <div class=" flex flex-col">
                             <div class="pb-6">
-                                @if (!empty(Auth::user()->image))
+
+
+                                @if ( Auth::user()->image )
                                     <img id="previewImg" class="w-48 max-h-56"
                                     src="{{ $user->image }}" alt="image">
                                 @else
@@ -85,8 +99,7 @@
                                 @endif
                             </div>
 
-                            <label for="thumbnail" class="rounded-md bg-sky-600 text-white text-sm text-center py-2">Upload
-                                Image</label>
+                            <label for="thumbnail" class="rounded-md bg-sky-600 text-white text-sm text-center py-2">Upload Image</label>
                             <input type="file" name="thumbnail" id="thumbnail" class="hidden border-0"
                                 onchange="previewFile(this)">
                         </div>

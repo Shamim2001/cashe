@@ -22,7 +22,12 @@ class User extends Authenticatable {
         if ( str_starts_with( $name, 'http' ) ) {
             return $name;
         } else {
-            return asset( 'storage/uploads/clients/' . $name );
+            if ($name) {
+                return asset( 'storage/uploads/clients/' . $name );
+            } else {
+                return '';
+            }
+            // return asset( 'storage/uploads/clients/' . $name );
         }
     }
     /**
