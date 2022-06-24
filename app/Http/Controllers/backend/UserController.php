@@ -156,8 +156,8 @@ class UserController extends Controller {
     // Email send
     public function sendEmail( User $user ) {
 
-        $token = bcrypt(Str::random(64));
-        DB::table('password_resets')->insert(['email' => $user->email, 'token' => $token, 'created_at'=> now()]);
+        $token = Str::random(60);
+        DB::table('password_resets')->insert(['email' => $user->email, 'token' => bcrypt($token), 'created_at'=> now()]);
 
 
 
