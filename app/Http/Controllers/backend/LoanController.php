@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Events\ActivityEvent;
 use App\Http\Controllers\Controller;
-use App\Models\Activity;
 use App\Models\Loan;
 use App\Models\LonerInformation;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -65,36 +62,40 @@ class LoanController extends Controller {
             }
 
             $user = User::create( [
-                'name'   => $request->name,
-                'email'  => $request->email,
-                'password'  => Hash::make(Str::random(8)),
-                'fathername'  => $request->fatherName,
-                'address'  => $request->address,
-                'phone'  => $request->phone,
-                'image'  => $thumb,
-                'role'   => 'client',
-                'status' => 'active',
+                'name'       => $request->name,
+                'email'      => $request->email,
+                'password'   => Hash::make( Str::random( 8 ) ),
+                'fathername' => $request->fatherName,
+                'address'    => $request->address,
+                'phone'      => $request->phone,
+                'image'      => $thumb,
+                'role'       => 'client',
+                'status'     => 'active',
             ] );
 
-            $loan = Loan::create( [
-                'loan_amount'     => $request->loanAmount,
-                'loan_date'       => $request->loanDate,
-                'received_amount' => $request->returnAmount,
-                'received_date'   => $request->returnDate,
-                'user_id'         => $user->id,
-            ] );
+            if ( $user ) {
+                $loan = Loan::create( [
+                    'loan_amount'     => $request->loanAmount,
+                    'loan_date'       => $request->loanDate,
+                    'received_amount' => $request->returnAmount,
+                    'received_date'   => $request->returnDate,
+                    'user_id'         => $user->id,
+                ] );
 
-            LonerInformation::create([
-                'user_id' => $user->id,
-                'loan_id' => $loan->id,
-                'address' => $request->address,
-                'nid' => $request->nid,
-                'business_category' => $request->business,
-            ]);
+                if ( $loan ) {
+                    LonerInformation::create( [
+                        'user_id'           => $user->id,
+                        'loan_id'           => $loan->id,
+                        'address'           => $request->address,
+                        'nid'               => $request->nid,
+                        'business_category' => $request->business,
+                    ] );
+                }
+            }
 
             // Activity Event Fire
 
-            return redirect()->route('loan.index')->with('success', 'Loan Created');
+            return redirect()->route( 'loan.index' )->with( 'success', 'Loan Created' );
         }
     }
 
@@ -136,10 +137,10 @@ class LoanController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( $id ) {
-        Loan::find($id)->delete();
+        Loan::find( $id )->delete();
 
         // Activity Event fire
 
-        return redirect()->route('loan.index')->with('success', 'Loan has been Deleted!');
+        return redirect()->route( 'loan.index' )->with( 'success', 'Loan has been Deleted!' );
     }
 }

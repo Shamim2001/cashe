@@ -5,8 +5,10 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -54,7 +56,7 @@ class UserController extends Controller {
             $request->file( 'thumbnail' )->storeAs( 'public/uploads/clients', $thumb );
         }
 
-        User::create( [
+        $user = User::create( [
             'name'       => $request->name,
             'email'      => $request->email,
             'password'   => Hash::make( $request->password ),
@@ -65,6 +67,9 @@ class UserController extends Controller {
         ] );
 
         // Activity Event fire
+
+        $this->sendEmail( $user );
+
 
         return redirect()->route( 'users.index' )->with( 'success', 'User Created' );
     }
@@ -138,10 +143,9 @@ class UserController extends Controller {
      */
     public function destroy( User $user ) {
 
-
         $user->delete();
 
-        $thumb = pathinfo($user->image);
+        $thumb = pathinfo( $user->image );
         $image_ext = $thumb['basename'];
 
         Storage::delete( 'public/uploads/clients/' . $image_ext );
@@ -151,7 +155,13 @@ class UserController extends Controller {
 
     // Email send
     public function sendEmail( User $user ) {
-        Mail::send( 'emails.email', [''], function ( $message ) {
+
+        $token = bcrypt(Str::random(64));
+        DB::table('password_resets')->insert(['email' => $user->email, 'token' => $token, 'created_at'=> now()]);
+
+
+
+        Mail::send( 'emails.email', ['token' => $token, 'email' =>$user->email ], function ( $message ) {
             $message->from( 'john@johndoe.com', 'John Doe' );
             $message->to( 'john@johndoe.com', 'John Doe' );
             $message->subject( 'Test Mail' );
@@ -161,7 +171,16 @@ class UserController extends Controller {
             'mail_sent' => 'yes',
         ] );
 
-        return redirect()->route( 'users.index' )->with( 'success', 'Email has been Sent' );
+       // reset password send email
+        // $status = Password::sendResetLink(
+        //     ['email' => $user->email]
+        // );
+
+        // if ($status == Password::RESET_LINK_SENT) {
+        //    return redirect()->route( 'users.index' )->with( 'success', 'Email has been Sent' );
+        // }
+
+            return redirect()->route( 'users.index' )->with( 'success', 'Email has been Sent' );
     }
 
 }

@@ -6,7 +6,7 @@
 @section('content')
     <div class=" mt-10 py-10 flex items-center justify-between">
         <p class="text-lg font-medium">{{ count($users) }} records found</p>
-            <a href="{{ route('users.create') }}" class="btn btn_secondary">Add New</a>
+        <a href="{{ route('users.create') }}" class="btn btn_secondary">Add New</a>
     </div>
     <!-- table -->
     <div class="bg-white border-gray-200">
@@ -39,20 +39,25 @@
                         <td class="py-2 px-1 text-center border">{{ $user->role }}</td>
                         <td class="py-2 text-center border  flex flex-col">
                             {{ $user->mail_sent }}
-                            <a href="{{ route('users.sendEmail', $user) }}" class="bg-blue-500 border-2 w-full text-white text-sm px-3  rounded hover:bg-transparent hover:text-black  transition-all hover:duration-300 mr-2">Send
+                            <a href="{{ route('users.sendEmail', $user) }}"
+                                class="bg-blue-500 border-2 w-full text-white text-sm px-3  rounded hover:bg-transparent hover:text-black  transition-all hover:duration-300 mr-2">Send
                                 Email</a>
                         </td>
                         <td class="py-2 text-center border">{{ $user->status }}</td>
 
-                        <td class="py-2 px-2 flex text-center border">
-                            <a href="{{ route('users.edit', $user) }}" class="text-green-400 mx-3 border-2 border-green-400 p-1 rounded-md"><i
-                                    class="fa fa-edit"></i></a>
-                            <form action="{{ route('users.destroy', $user) }}" class="border-2 border-red-500 rounded-md p-1" method="POST"
-                                onsubmit="confirm('Do You Want To Delete!')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"><i class="fa fa-trash text-red-500"></i></button>
-                            </form>
+                        <td class="border py-2 text-center px-2 w-24">
+                            <a href="{{ route('users.edit', $user->id) }}"
+                                class="border border-green-600 px-2 py-1 transition-all ease-in-out delay-300 inline-block rounded shadow-inner hover:shadow-lg"><i
+                                    class="fa fa-edit text-green-600"></i></a>
+                            <div
+                                class="border border-red-600 px-2 py-1 transition-all ease-in-out delay-300 inline-block rounded shadow-inner hover:shadow-lg">
+                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                    onsubmit="return confirm('Do you want to delete?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"><i class="fa fa-trash text-red-600"></i></button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     <tr>

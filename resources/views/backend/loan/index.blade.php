@@ -25,7 +25,7 @@
             @forelse ($loans as $loan)
                 <tr>
                     {{-- <td class="py-2 text-center border border-gray-400">{{ $loan->id }}</td> --}}
-                    <td class="py-2 text-center border border-gray-400">{{ $loan->user->name }}</td>
+                    <td class="py-2 text-center border border-gray-400">{{ optional($loan->user)->name }}</td>
                     <td class="py-2 text-center border border-gray-400">{{ $loan->loan_amount }}</td>
                     <td class="py-2 text-center border border-gray-400">{{ $loan->created_at->format('d M, Y') }}
                     </td>

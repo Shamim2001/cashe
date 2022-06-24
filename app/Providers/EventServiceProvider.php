@@ -34,10 +34,10 @@ class EventServiceProvider extends ServiceProvider {
 
     // Observer
     protected $observers = [
-        Loan::class => [LoanObserver::class],
-        User::class => [UserObserver::class],
-        CashIn::class => [CashInObserver::class],
-        LonerInformation::class => [LonerInformationObserver::class],
+        // Loan::class => [LoanObserver::class],
+        // User::class => [UserObserver::class],
+        // CashIn::class => [CashInObserver::class],
+        // LonerInformation::class => [LonerInformationObserver::class],
     ];
     /**
      * Register any events for your application.
