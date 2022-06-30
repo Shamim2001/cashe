@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\UserEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -159,13 +161,19 @@ class UserController extends Controller {
         $token = Str::random(60);
         DB::table('password_resets')->insert(['email' => $user->email, 'token' => bcrypt($token), 'created_at'=> now()]);
 
+        $data = [
+            'user' => Auth::user(),
+            'client' => $user,
+            'token' => $token,
+        ];
 
+        Mail::send(new UserEmail($data));
 
-        Mail::send( 'emails.email', ['token' => $token, 'email' =>$user->email ], function ( $message ) {
-            $message->from( 'john@johndoe.com', 'John Doe' );
-            $message->to( 'john@johndoe.com', 'John Doe' );
-            $message->subject( 'Test Mail' );
-        } );
+        // Mail::send( 'emails.email', ['token' => $token, 'email' =>$user->email ], function ( $message ) use($user) {
+        //     $message->from( Auth::user()->email, Auth::user()->name );
+        //     $message->to( $user->email, $user->name );
+        //     $message->subject( 'Test Mail' );
+        // } );
 
         $user->update( [
             'mail_sent' => 'yes',

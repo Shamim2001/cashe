@@ -38,10 +38,9 @@
                         <td class="py-2 text-center border">{{ $user->phone }}</td>
                         <td class="py-2 px-1 text-center border">{{ $user->role }}</td>
                         <td class="py-2 text-center border  flex flex-col">
-                            {{ $user->mail_sent }}
+                            <p class="font-medium capitalize">{{ $user->mail_sent }}</p>
                             <a href="{{ route('users.sendEmail', $user) }}"
-                                class="bg-blue-500 border-2 w-full text-white text-sm px-3  rounded hover:bg-transparent hover:text-black  transition-all hover:duration-300 mr-2">Send
-                                Email</a>
+                                class="bg-blue-500 border-2 w-full text-white text-sm px-3  rounded hover:bg-transparent hover:text-black  transition-all hover:duration-300 mr-2"><i class="fa-solid fa-envelope-circle-check"></i></a>
                         </td>
                         <td class="py-2 text-center border">{{ $user->status }}</td>
 
