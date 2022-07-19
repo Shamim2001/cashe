@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\CashInController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\LoanController;
 use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\backend\UserManagementController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/mail/send/{user}', [UserController::class, 'sendEmail'])->name('users.sendEmail');
     // activity route
     Route::get( '/activity', [ActivityController::class, 'index'] )->name( 'activity.index' );
+
+    Route::get('user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+    Route::get('user-roles', [UserManagementController::class, 'roleIndex'])->name('user.role.index');
+    Route::post('user-roles/store', [UserManagementController::class, 'roleStore'])->name('role.store');
 });
 
 
