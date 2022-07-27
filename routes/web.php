@@ -43,8 +43,19 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get( '/activity', [ActivityController::class, 'index'] )->name( 'activity.index' );
 
     Route::get('user-management', [UserManagementController::class, 'index'])->name('user.management.index');
+    Route::get('user/edit/{user}', [UserManagementController::class, 'userEdit'])->name('user.edit');
+    Route::put('user/update/{user}', [UserManagementController::class, 'userUpdate'])->name('user.update');
+    Route::delete('user/delete/{user}', [UserManagementController::class, 'userDelete'])->name('user.delete');
+
+    // Role
     Route::get('user-roles', [UserManagementController::class, 'roleIndex'])->name('user.role.index');
-    Route::post('user-roles/store', [UserManagementController::class, 'roleStore'])->name('role.store');
+    Route::match(['put', 'post'], 'user-roles/store', [UserManagementController::class, 'roleStore'])->name('role.store');
+    Route::delete('user-roles/delete/{role}', [UserManagementController::class, 'roleDelete'])->name('role.delete');
+
+    // Permission
+    Route::get( 'user-permissions', [UserManagementController::class, 'permissionIndex'] )->name( 'user.permission.index' );
+    Route::match(['put', 'post'], 'user-permissions/store', [UserManagementController::class, 'permissionStore'])->name('permission.store');
+    Route::delete('user-permissions/delete/{permission}', [UserManagementController::class, 'permissionDelete'])->name('permission.delete');
 });
 
 

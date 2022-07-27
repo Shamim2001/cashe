@@ -123,7 +123,7 @@
                              <input class="w-full absolute z-10 cursor-pointer opacity-0" type="checkbox"
                                  id="chck1">
                              <div class="flex justify-between items-center px-5 cursor-pointer" for="chck1">
-                                 <span class="cursor-pointer hover:text-white hover:bg-gray-700">
+                                 <span class="cursor-pointer">
                                     <i class="fa fa-user"></i>
                                     Users Management
                                     <i class="fa fa-angle-down ml-8"></i>
@@ -136,10 +136,10 @@
                                             <a href="{{ route('user.role.index') }}">Role</a>
                                          </li>
                                          <li class="pb-2 px-1 hover:bg-white hover:text-black transition-all duration-300 rounded-md ">
-                                            <a href="#">Permission</a>
+                                            <a href="{{ route('user.permission.index') }}">Permission</a>
                                          </li>
                                          <li class="pb-2 px-1 hover:bg-white hover:text-black transition-all duration-300 rounded-md ">
-                                            <a href="#">User</a>
+                                            <a href="{{ route('user.management.index') }}">User</a>
                                          </li>
                                      </ul>
                                  </div>
